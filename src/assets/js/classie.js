@@ -9,14 +9,6 @@
  * classie.remove( elem, 'my-unwanted-class' )
  * classie.toggle( elem, 'my-class' )
  */
-
-/*jshint browser: true, strict: true, undef: true, unused: true */
-/*global define: false, module: false */
-
-( function( window ) {
-
-'use strict';
-
 // class helper functions from bonzo https://github.com/ded/bonzo
 
 function classReg( className ) {
@@ -25,7 +17,7 @@ function classReg( className ) {
 
 // classList support for class management
 // altho to be fair, the api sucks because it won't accept multiple classes at once
-var hasClass, addClass, removeClass;
+let hasClass, addClass, removeClass;
 
 if ( 'classList' in document.documentElement ) {
   hasClass = function( elem, c ) {
@@ -53,11 +45,11 @@ else {
 }
 
 function toggleClass( elem, c ) {
-  var fn = hasClass( elem, c ) ? removeClass : addClass;
+  const fn = hasClass( elem, c ) ? removeClass : addClass;
   fn( elem, c );
 }
 
-var classie = {
+export const classie = {
   // full names
   hasClass: hasClass,
   addClass: addClass,
@@ -69,17 +61,3 @@ var classie = {
   remove: removeClass,
   toggle: toggleClass
 };
-
-// transport
-if ( typeof define === 'function' && define.amd ) {
-  // AMD
-  define( classie );
-} else if ( typeof exports === 'object' ) {
-  // CommonJS
-  module.exports = classie;
-} else {
-  // browser global
-  window.classie = classie;
-}
-
-})( window );
